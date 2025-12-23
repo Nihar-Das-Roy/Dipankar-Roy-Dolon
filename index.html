@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prapti Studio & Training Center | Photocopy, Printing & Computer Training</title>
+    <meta name="description" content="Professional photocopy, printing, online application and computer training services in Bangladesh. Contact Prapti Studio for all your business needs.">
+    <style>
+        /* ==================== CSS VARIABLES & THEME ==================== */
+        :root {
+            --primary-blue: #0066cc;
+            --primary-green: #00a368;
+            --accent-teal: #0f9b8f;
+            --neutral-50: #f8fafb;
+            --neutral-100: #f0f2f5;
+            --neutral-200: #e5e7eb;
+            --neutral-500: #6b7280;
+            --neutral-700: #374151;
+            --neutral-900: #111827;
+            --white: #ffffff;
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==================== RESET & BASE STYLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--neutral-700);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ==================== TYPOGRAPHY ==================== */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--neutral-900);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* ==================== BUTTONS ==================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-teal);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: #0052a3;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-large {
+            padding: 16px 40px;
+            font-size: 1.1rem;
+        }
+
+        /* ==================== NAVBAR ==================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--white);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 transparent;
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+            padding: 10px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--neutral-700);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--neutral-900);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            padding: 120px 20px 80px;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 163, 104, 0.05) 100%);
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            color: var(--neutral-900);
+            margin-bottom: 16px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .hero .tagline {
+            font-size: 1.25rem;
+            color: var(--neutral-500);
+            margin-bottom: 40px;
+            animation: slideUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .hero .cta-button {
+            animation: slideUp 0.6s ease-out 0.4s backwards;
+        }
+
+        /* ==================== ABOUT SECTION ==================== */
+        .about {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-title h2 {
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: var(--neutral-500);
+            font-size: 1.1rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-content {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .about-content h3 {
+            color: var(--primary-blue);
+            margin-bottom: 16px;
+        }
+
+        .about-content p {
+            margin-bottom: 16px;
+            color: var(--neutral-700);
+            line-height: 1.8;
+        }
+
+        .owner-info {
+            background-color: var(--neutral-50);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            margin-top: 24px;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .owner-info p {
+            margin: 0;
+        }
+
+        .owner-name {
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        /* ==================== SERVICES SECTION ==================== */
+        .services {
+            padding: 80px 20px;
+            background-color: var(--neutral-50);
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            padding: 32px 24px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.4s; }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-top: 4px solid var(--primary-green);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background-color: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 12px;
+            color: var(--neutral-900);
+        }
+
+        .service-card p {
+            color: var(--neutral-500);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ==================== CONTACT SECTION ==================== */
+        .contact {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .contact-content h2 {
+            margin-bottom: 24px;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-green));
+            color: var(--white);
+            padding: 40px 32px;
+            border-radius: var(--radius-lg);
+            margin: 40px 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-info p {
+            color: var(--white);
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .whatsapp-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 16px 0;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin: 24px 0 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: var(--white);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ea853;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background-color: var(--neutral-900);
+            color: var(--neutral-200);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer p {
+            color: var(--neutral-200);
+            margin-bottom: 8px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 16px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--neutral-200);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ==================== RESPONSIVE DESIGN ==================== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background-color: var(--white);
+                padding: 20px;
+                gap: 10px;
+                box-shadow: var(--shadow-md);
+                animation: slideDown 0.3s ease-out;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(10px, 10px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-image {
+                order: 2;
+            }
+
+            .about-content {
+                order: 1;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .nav-container {
+                padding: 15px;
+            }
+
+            .hero {
+                padding: 80px 16px 50px;
+            }
+
+            .about,
+            .services,
+            .contact {
+                padding: 60px 16px;
+            }
+
+            .section-title {
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Prapti Studio</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Prapti Studio & Training Center</h1>
+            <p class="tagline">Professional Solutions for Your Business Needs</p>
+            <a href="https://wa.me/8801777323251?text=Hello%20Prapti%20Studio%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services" 
+               class="btn btn-primary btn-large cta-button" target="_blank">
+                💬 Chat on WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <div class="section-title">
+            <h2>About Us</h2>
+            <p>Serving the community with excellence and dedication</p>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="1.jpg" 
+                     alt="Dipankar Roy Dolon - Owner">
+            </div>
+
+            <div class="about-content">
+                <h3>Welcome to Prapti Studio</h3>
+                <p>Prapti Studio & Training Center is a trusted name in providing professional services to our community. With years of experience, we have built a reputation for quality, reliability, and customer satisfaction.</p>
+                
+                <p>Our mission is to empower individuals and businesses by providing accessible, high-quality services in photocopy, printing, online applications, and computer training.</p>
+
+                <div class="owner-info">
+                    <p><span class="owner-name">Owner: Dipankar Roy Dolon</span></p>
+                    <p>Dedicated to delivering excellence in every service we provide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="services" id="services">
+        <div class="services-container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Everything you need in one place</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📋</div>
+                    <h3>Photocopy & Printing</h3>
+                    <p>High-quality photocopy and printing services for documents, forms, and promotional materials. Professional results at competitive rates.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📝</div>
+                    <h3>Online Applications</h3>
+                    <p>Expert assistance with government forms and online applications. We help you navigate bureaucratic processes smoothly and accurately.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Computer Training</h3>
+                    <p>Comprehensive computer training from basic to advanced levels. Learn essential skills for the modern digital workplace with experienced instructors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2>Get In Touch</h2>
+            <p>Ready to use our services? We're here to help you succeed.</p>
+
+            <div class="contact-info">
+                <p>WhatsApp Number:</p>
+                <div class="whatsapp-number">+88 01777-323251</div>
+                <p style="font-size: 0.95rem; margin-top: 16px;">Quick response and professional assistance</p>
+            </div>
+
+            <div class="contact-buttons">
+                <a href="https://wa.me/8801777323251?text=Hello%20Prapti%20Studio%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services" 
+                   class="btn btn-whatsapp btn-large" target="_blank">
+                    💬 Chat Now on WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>Prapti Studio & Training Center</strong></p>
+            <p>Photocopy • Printing • Online Applications • Computer Training</p>
+            
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: var(--neutral-500);">
+                © 2025 Prapti Studio & Training Center. All rights reserved. | Owned by Dipankar Roy Dolon
+            </p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animations for elements
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards and other elements for scroll animations
+        document.querySelectorAll('.service-card, .about-grid').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
